@@ -19,9 +19,9 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>example</groupId>
-  <artifactId>tomitribe-jms11-example</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <groupId>tomitribe</groupId>
+  <artifactId>jms-example</artifactId>
+  <version>SNAPSHOT</version>
 
   <name>example</name>
   <description>ActiveMQ JMS 1.1 Pub/Sub and Queue Example Code</description>
