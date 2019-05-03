@@ -1,6 +1,7 @@
 ## Overview
 
-This is an example of how to use the Java JMS api with ActiveMQ via the AMQP protocol.
+This is an example of how to use the Java JMS api with ActiveMQ executing both Pub/Sub and 
+Queue based messaging.
 
 ## Prereqs
 
@@ -15,18 +16,26 @@ Run:
 
 ## Running the Examples
 
-In one terminal window run:
+There are two Java classes. example.Listener and example.Publisher.  They are designed to 
+exchange messages using either a Queue or a Topic (pub/sub).  To take full advantage of 
+the example launch at least one Publisher and one Listener. Than type in your messages 
+in the Publisher console where it says to do so (at the prompt).
 
-    java -cp target/amqp-example-0.1-SNAPSHOT.jar example.Listener
+Both the Publisher and the Listener have to be using the same kind of message system. So 
+they must both be using Queue or they must both be using Topic (pub/sub). The commands to 
+start instances of each program are shown below.
 
-In another terminal window run:
+You can run multiple Publishers and/or multiple Listeners as long as they specify the same 
+kind of messaging system the will will work together with Publishers sending messages to 
+the Listeners.
 
-    java -cp target/amqp-example-0.1-SNAPSHOT.jar example.Publisher
+In individual terminal windows for Topic (pub/sub) based messaging:
 
-You can control to which AMQP server the examples try to connect to by
-setting the following environment variables: 
+    java -cp target/tomitribe-jms11-example-0.1-SNAPSHOT.jar example.Listener pub/sub
+    java -cp target/tomitribe-jms11-example-0.1-SNAPSHOT.jar example.Publisher pub/sub
 
-* `ACTIVEMQ_HOST`
-* `ACTIVEMQ_PORT`
-* `ACTIVEMQ_USER`
-* `ACTIVEMQ_PASSWORD`
+In individual terminal windows for Queue based messaging:
+
+    java -cp target/tomitribe-jms11-example-0.1-SNAPSHOT.jar example.Listener queue
+    java -cp target/tomitribe-jms11-example-0.1-SNAPSHOT.jar example.Publisher queue
+
