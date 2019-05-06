@@ -1,0 +1,13 @@
+JarIndex-Version: 1.0
+
+netty-transport-native-epoll-4.1.32.Final-linux-x86_64.jar
+META-INF
+META-INF/maven
+META-INF/maven/io.netty
+META-INF/maven/io.netty/netty-transport-native-epoll
+META-INF/native
+io
+io/netty
+io/netty/channel
+io/netty/channel/epoll
+
