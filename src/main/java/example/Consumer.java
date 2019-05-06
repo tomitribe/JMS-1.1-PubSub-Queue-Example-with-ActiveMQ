@@ -31,26 +31,26 @@ class Consumer {
 
     public static void main(String[] args) throws JMSException {
 
-    	/*	Every JMS provider (every library that implements the JMS API) 
-    	 * 	will have its own implementation of the javax.jms.ConnectionFactory. 
+    	/*  Every JMS provider (every library that implements the JMS API) 
+    	 *  will have its own implementation of the javax.jms.ConnectionFactory. 
     	 * 
-    	 * 	The purpose of the ConnectionFactory is to create a network connection 
-    	 * 	to a specific JMS broker, such as ActiveMQ, or a specific protocol, 
+    	 *  The purpose of the ConnectionFactory is to create a network connection 
+    	 *  to a specific JMS broker, such as ActiveMQ, or a specific protocol,
     	 *  such as AMQP.  This allows the JMS library to send and receive messages
     	 *  over a network from the broker.
     	 * 
-    	 * 	In this case we are using the Apache Qpid JMS library which is specific 
-    	 * 	to the protocol, AMQP. AMQP is only one of ten protocols currently supported by 
+    	 *  In this case we are using the Apache Qpid JMS library which is specific 
+    	 *  to the protocol, AMQP. AMQP is only one of ten protocols currently supported by
     	 *  ActiveMQ.
     	 */
         JmsConnectionFactory factory = new JmsConnectionFactory("amqp://localhost:5672");
         Connection connection = factory.createConnection("admin", "password");
         connection.start();
         
-        /*	Every JMS Connection can have multiple sessions which manage things like
-         * 	transactions and message persistence separately.  In practice multiple sessions 
+        /*  Every JMS Connection can have multiple sessions which manage things like
+         *  transactions and message persistence separately.  In practice multiple sessions
          *  are not used much by developers but may be used in more sophisticated
-         * 	application servers to conserve resources.
+         *  application servers to conserve resources.
          */
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         
