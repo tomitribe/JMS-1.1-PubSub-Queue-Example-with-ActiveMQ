@@ -42,7 +42,7 @@ class Producer {
     	 *  over a network from the broker.
     	 * 
     	 * 	In this case we are using the Apache Qpid JMS library which is specific 
-    	 * 	to the protocol, AMQP. AMQP is only one ten protocols currently supported by 
+    	 * 	to the protocol, AMQP. AMQP is only one of ten protocols currently supported by 
     	 *  ActiveMQ.
     	 */
         JmsConnectionFactory factory = new JmsConnectionFactory("amqp://localhost:5672");
@@ -50,19 +50,19 @@ class Producer {
         connection.start();
         
         /*	Every JMS Connection can have multiple sessions which manage things like
-         * 	transactions separately.  In practice multiple sessions are not used much 
-         * 	by developers but may be used in more sophisticated application servers to
-         *  conserve resources.
+         * 	transactions and persistence separately.  In practice multiple sessions are 
+         *  not used much by developers but may be used in more sophisticated application 
+         *  servers to conserve resources.
          */
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         
         /*  A Destination is an address of a specific Topic or Queue hosted by the 
          *  JMS broker. The only difference between using JMS for a Topic (Pub/Sub) 
-         *  and Queue is this bit of code here - at least in the simplest 
+         *  and Queue (P2P) is this bit of code here - at least in the simplest 
          *  cases.  
          *  
-         *  That said, there are significant differences between Pub/Sub and 
-         *  Queue based messaging and understanding those differences is key to 
+         *  That said, there are significant differences between Topic- and 
+         *  Queue-based messaging and understanding those differences is key to 
          *  understanding JMS and messaging systems in general. This is discussed in 
          *  more detail the blog post, "5 Minutes or Less: ActiveMQ with JMS Queues and Topics".
          */
@@ -81,19 +81,7 @@ class Producer {
          *  messages to one Topic or Queue. 
 		 */
         MessageProducer producer = session.createProducer(destination);
-        
-        
-       /*There are a lot of different configurations for a JMS Topic or Queue that can
-        *  be set programmatically or via configuration. The Delivery Mode determines
-        *  if messages are ephemeral or persistent. An ephemeral message will only be 
-        *  sent to other JMS applications that are listening to the specific Destination
-        *  at the time the message is sent.  A persistent delivery mode means that messages
-        *  are stored and can be sent to clients currently listening to the Topic or Queue 
-        *  as well as any JMS clients that start listening later.
-        */
-        producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-        
-        
+
         
         /* This section of code simply reads input from the console and then sends that
          * input as JMS Message to the ActiveMQ broker.

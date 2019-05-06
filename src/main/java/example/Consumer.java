@@ -40,7 +40,7 @@ class Consumer {
     	 *  over a network from the broker.
     	 * 
     	 * 	In this case we are using the Apache Qpid JMS library which is specific 
-    	 * 	to the protocol, AMQP. AMQP is only one ten protocols currently supported by 
+    	 * 	to the protocol, AMQP. AMQP is only one of ten protocols currently supported by 
     	 *  ActiveMQ.
     	 */
         JmsConnectionFactory factory = new JmsConnectionFactory("amqp://localhost:5672");
@@ -48,19 +48,19 @@ class Consumer {
         connection.start();
         
         /*	Every JMS Connection can have multiple sessions which manage things like
-         * 	transactions separately.  In practice multiple sessions are not used much 
-         * 	by developers but may be used in more sophisticated application servers to
-         *  conserve resources.
+         * 	transactions and message persistence separately.  In practice multiple sessions 
+         *  are not used much by developers but may be used in more sophisticated
+         * 	application servers to conserve resources.
          */
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         
         /*  A Destination is an address of a specific Topic or Queue hosted by the 
          *  JMS broker. The only difference between using JMS for a Topic (Pub/Sub) 
-         *  and Queue is this bit of code here - at least in the simplest 
+         *  and Queue (P2P) is this bit of code here - at least in the simplest 
          *  cases.  
          *  
-         *  That said, there are significant differences between Pub/Sub and 
-         *  Queue based messaging and understanding those differences is key to 
+         *  That said, there are significant differences between Topic- and 
+         *  Queue-based messaging and understanding those differences is key to 
          *  understanding JMS and messaging systems in general. This is discussed in 
          *  more detail the blog post, "5 Minutes or Less: ActiveMQ with JMS Queues and Topics".
          */
